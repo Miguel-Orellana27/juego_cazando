@@ -1,15 +1,16 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <link rel="stylesheet" href="cazando.css" />
   <title>Juego Cazando</title>
- 
+  <link href="cazando.css" rel="stylesheet"/>
 </head>
-<body onload="iniciarJuego();">
+<body onload="iniciarJuego()">
  
   <h1>Juego Cazando</h1>
-  <p>Autor: Miguel Orellana</p>
-  <canvas id="areaJuego" width="500" height="500"></canvas>
+  <p>Autor: Victor Pilachanga</p>
+  <div class="contenedor">
+    <canvas id="areaDeJuego" width="500" height="500"></canvas>
+  </div>
  
   <div class="controles">
     <button>⬆</button>
@@ -27,6 +28,8 @@
  
   <p id="mensaje"></p>
  
+ 
   <script src="cazando.js"></script>
+ 
 </body>
 </html>
