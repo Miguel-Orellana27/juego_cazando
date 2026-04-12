@@ -36,36 +36,71 @@ function limpiarCanvas() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
 }
 
+
 function moverIzquierda() {
     gatoX -= velocidadMovimiento;
-
     if (gatoX < 0) {
-        gatoX = 0;
+        gatoX = 0; 
     }
-
-    limpiarCanvas();      
-    dibujarComida();      
-    dibujarGato();        
+    actualizarDibujo();
 }
 
-let btnIzquierda = document.getElementById("btnIzquierda");
+function moverDerecha() {
+    gatoX += velocidadMovimiento;
+    if (gatoX + anchoGato > canvas.width) {
+        gatoX = canvas.width - anchoGato; 
+    }
+    actualizarDibujo();
+}
+
+function moverArriba() {
+    gatoY -= velocidadMovimiento;
+    if (gatoY < 0) {
+        gatoY = 0; 
+    }
+    actualizarDibujo();
+}
+
+function moverAbajo() {
+    gatoY += velocidadMovimiento;
+    if (gatoY + altoGato > canvas.height) {
+        gatoY = canvas.height - altoGato; 
+    }
+    actualizarDibujo();
+}
+
+
+function actualizarDibujo() {
+    limpiarCanvas();
+    graficarComida(); 
+    graficarGato();   
+}
+
+
 
 function iniciarJuego() {
     graficarGato(); 
 
+    
     comidaX = Math.random() * (canvas.width - anchoComida);
     comidaY = Math.random() * (canvas.height - altoComida);
+    
     if (comidaX < 0) comidaX = 0;
     if (comidaY < 0) comidaY = 0;
     if (comidaX + anchoComida > canvas.width) comidaX = canvas.width - anchoComida;
-    if (comidaY + altoComida > canvas.height) comidaY = canvas.height - altoComida;
+    if (comidaY + altoGato > canvas.height) comidaY = canvas.height - altoGato;
     
     graficarComida(); 
 
-    if (btnIzquierda) { 
-      btnIzquierda.addEventListener('click', moverIzquierda);
-    } else {
-      console.error();
-    }
-}
+    let btnIzquierda = document.getElementById("btnIzquierda");
+    btnIzquierda.addEventListener('click', moverIzquierda);
 
+    let btnDerecha = document.getElementById("btnDerecha");
+    btnDerecha.addEventListener('click', moverDerecha);
+
+    let btnArriba = document.getElementById("btnArriba");
+    btnArriba.addEventListener('click', moverArriba);
+
+    let btnAbajo = document.getElementById("btnAbajo");
+    btnAbajo.addEventListener('click', moverAbajo);
+}
