@@ -9,14 +9,16 @@ let gatoY = 0;
 let comidaX = 0;
 let comidaY = 0;
 
-// Dimensiones
+let puntos = 0; 
+
+let tiempo = 10; 
+let intervaloTiempo = null; 
+
 const anchoGato = 80;
 const altoGato = 50;
 const anchoComida = 20;
 const altoComida = 20;
-const velocidadMovimiento = 10; 
-
-
+const velocidadMovimiento = 10;
 
 function graficarRectangulo(x, y, ancho, alto, color) {
     ctx.fillStyle = color;
@@ -38,7 +40,6 @@ function graficarComida() {
 }
 
 
-
 function limpiarCanvas() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
 }
@@ -56,21 +57,34 @@ function detectarColision() {
         gatoY + altoGato > comidaY &&
         gatoY < comidaY + altoComida) {
         
-       
-       
         comidaX = generarAleatorio(0, canvas.width - anchoComida);
         comidaY = generarAleatorio(0, canvas.height - altoComida);
-        
-       
         actualizarDibujo(); 
 
-        
         puntos++; 
         mostrarEnSpan("puntos", puntos); 
     }
 }
 
 
+function restarTiempo() {
+    tiempo--; 
+    mostrarEnSpan("tiempo", tiempo); 
+
+    if (tiempo <= 0) {
+        detenerJuego();
+    }
+}
+
+function detenerJuego() {
+    clearInterval(intervaloTiempo); 
+    document.getElementById("mensaje").innerText = "¡Tiempo agotado! Tu puntaje: " + puntos;
+
+    document.getElementById("btnArriba").disabled = true;
+    document.getElementById("btnIzquierda").disabled = true;
+    document.getElementById("btnAbajo").disabled = true;
+    document.getElementById("btnDerecha").disabled = true;
+}
 
 function moverIzquierda() {
     gatoX -= velocidadMovimiento;
@@ -109,52 +123,38 @@ function moverAbajo() {
 }
 
 
-
-
 function iniciarJuego() {
-  
     graficarGato();
 
-    
     comidaX = generarAleatorio(0, canvas.width - anchoComida);
     comidaY = generarAleatorio(0, canvas.height - altoComida);
+    graficarComida(); 
 
-    
-    graficarComida();
-
-    
     puntos = 0;
     mostrarEnSpan("puntos", puntos); 
 
+    tiempo = 10;
+    mostrarEnSpan("tiempo", tiempo);
 
     let btnIzquierda = document.getElementById("btnIzquierda");
     let btnDerecha = document.getElementById("btnDerecha");
     let btnArriba = document.getElementById("btnArriba");
     let btnAbajo = document.getElementById("btnAbajo");
 
-    if (!btnIzquierda) {
-        console.error("Error crítico: Botón 'btnIzquierda' no encontrado. No se puede continuar.");
-        return;
-    }
+    if (!btnIzquierda) { console.error("Error crítico: Botón 'btnIzquierda' no encontrado."); return; }
     btnIzquierda.addEventListener('click', moverIzquierda);
 
-    if (!btnDerecha) {
-        console.error("Error crítico: Botón 'btnDerecha' no encontrado. No se puede continuar.");
-        return;
-    }
+    if (!btnDerecha) { console.error("Error crítico: Botón 'btnDerecha' no encontrado."); return; }
     btnDerecha.addEventListener('click', moverDerecha);
 
-    if (!btnArriba) {
-        console.error("Error crítico: Botón 'btnArriba' no encontrado. No se puede continuar.");
-        return;
-    }
+    if (!btnArriba) { console.error("Error crítico: Botón 'btnArriba' no encontrado."); return; }
     btnArriba.addEventListener('click', moverArriba);
 
-    if (!btnAbajo) {
-        console.error("Error crítico: Botón 'btnAbajo' no encontrado. No se puede continuar.");
-        return;
-    }
+    if (!btnAbajo) { console.error("Error crítico: Botón 'btnAbajo' no encontrado."); return; }
     btnAbajo.addEventListener('click', moverAbajo);
+
+   
+    intervaloTiempo = setInterval(restarTiempo, 1000);
 
     console.log("Juego iniciado correctamente. Controles listos.");
 }
