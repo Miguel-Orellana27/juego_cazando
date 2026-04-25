@@ -6,57 +6,68 @@
   font-family:'Arial Black', sans-serif;
 }
 
-/* FONDO OSCURO NEON */
+/* FONDO CON IMAGEN + EFECTO OSCURO */
 body{
   text-align:center;
-  background: linear-gradient(180deg,#000000,#020617,#000000);
+
+  background:
+    linear-gradient(rgba(0,0,0,0.75), rgba(0,0,0,0.85)),
+    url("background.png") no-repeat center center fixed;
+
+  background-size: cover;
   color:white;
   padding:20px;
 }
 
-/* TITULO */
+/* TITULO PRINCIPAL */
 h1{
-  font-size:40px;
+  font-size:42px;
   color:#00ffff;
   text-shadow:
     0 0 10px #00ffff,
-    0 0 25px #00ffff;
+    0 0 25px #00ffff,
+    0 0 50px #0ea5e9;
+  margin-bottom:10px;
 }
 
-/* AUTOR */
+/* TEXTO GENERAL */
 p{
   color:#22c55e;
   margin-bottom:10px;
 }
 
-/* CANVAS */
-canvas{
-  background:#020617;
-  border:3px solid #00ffff;
-  border-radius:12px;
-  box-shadow:
-    0 0 20px #00ffff,
-    inset 0 0 10px #0ea5e9;
-}
-
-/* CONTENEDOR (sin cambiar clase) */
+/* CONTENEDOR */
 .contenedor{
   margin-top:20px;
 }
 
-/* CONTROLES */
-.controles{
-  margin-top:20px;
+/* CANVAS ESTILO JUEGO */
+canvas{
+  background:#020617;
+  border:3px solid #00ffff;
+  border-radius:15px;
+
+  box-shadow:
+    0 0 20px #00ffff,
+    0 0 40px #0ea5e9,
+    inset 0 0 15px #0ea5e9;
+
+  animation: glow 2s infinite;
 }
 
-/* BOTONES ESTILO GEOMETRY DASH */
+/* CONTROLES */
+.controles{
+  margin-top:25px;
+}
+
+/* BOTONES GEOMETRY DASH */
 button{
-  margin:6px;
-  width:60px;
-  height:60px;
-  font-size:22px;
+  margin:8px;
+  width:65px;
+  height:65px;
+  font-size:24px;
   border:none;
-  border-radius:12px;
+  border-radius:14px;
   cursor:pointer;
 
   background: linear-gradient(145deg,#00ffff,#0ea5e9);
@@ -64,20 +75,24 @@ button{
 
   box-shadow:
     0 0 15px #00ffff,
-    0 0 25px #00ffff;
+    0 0 30px #00ffff;
 
   transition:0.2s;
 }
 
-/* BOTON REINICIAR DIFERENTE */
+/* BOTON REINICIAR */
 #btnReiniciar{
   width:auto;
-  padding:10px 25px;
-  font-size:18px;
+  height:auto;
+  padding:12px 30px;
+  font-size:20px;
+
   background: linear-gradient(145deg,#facc15,#eab308);
+  color:black;
+
   box-shadow:
     0 0 15px #facc15,
-    0 0 25px #facc15;
+    0 0 30px #facc15;
 }
 
 /* HOVER */
@@ -85,7 +100,7 @@ button:hover{
   transform:scale(1.15);
   box-shadow:
     0 0 25px #00ffff,
-    0 0 40px #38bdf8;
+    0 0 50px #38bdf8;
 }
 
 /* CLICK */
@@ -99,31 +114,38 @@ button:active{
   font-size:20px;
   display:flex;
   justify-content:center;
-  gap:40px;
+  gap:50px;
 }
 
 /* NUMEROS */
 #puntos, #tiempo{
   color:#facc15;
-  text-shadow:0 0 10px #facc15;
+  text-shadow:
+    0 0 10px #facc15,
+    0 0 20px #facc15;
 }
 
 /* MENSAJE FINAL */
 #mensaje{
-  font-size:22px;
+  font-size:24px;
   font-weight:bold;
   margin-top:15px;
   color:#f43f5e;
-  text-shadow:0 0 10px #f43f5e;
+
+  text-shadow:
+    0 0 10px #f43f5e,
+    0 0 20px #f43f5e;
 }
 
-/* EFECTO GLOW ANIMADO */
+/* ANIMACION GLOW */
 @keyframes glow{
-  0%{box-shadow:0 0 10px #00ffff;}
-  50%{box-shadow:0 0 25px #00ffff;}
-  100%{box-shadow:0 0 10px #00ffff;}
-}
-
-canvas{
-  animation:glow 2s infinite;
+  0%{
+    box-shadow:0 0 10px #00ffff;
+  }
+  50%{
+    box-shadow:0 0 30px #00ffff;
+  }
+  100%{
+    box-shadow:0 0 10px #00ffff;
+  }
 }
