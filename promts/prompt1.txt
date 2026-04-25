@@ -1,0 +1,1 @@
+modifica el css a un estilo del juego geometry dash sin hacer cambios a los ids y maten separado el css y el html
