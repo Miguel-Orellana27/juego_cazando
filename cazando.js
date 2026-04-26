@@ -81,7 +81,10 @@ function detectarColision() {
 
         
         puntos++; 
-        mostrarEnSpan("puntos", puntos); 
+        mostrarEnSpan("puntos", puntos);
+
+        tiempo = 15;
+        mostrarEnSpan("tiempo",tiempo);
 
         
         if (puntos >= puntajeMaximo) {
