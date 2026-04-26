@@ -1,5 +1,7 @@
 let imagenGato = new Image();
 imagenGato.src = "gato.png";
+let imagenComida = new Image();
+imagenComida.src = "comida.png";
 let canvas = document.getElementById("areaDeJuego");
 let ctx = canvas.getContext("2d");
 
@@ -43,7 +45,7 @@ function graficarGato() {
 
 function graficarComida() {
     let colorComida = "#08ffded8"; 
-    graficarRectangulo(comidaX, comidaY, anchoComida, altoComida, colorComida);
+   ctx.drawImage(imagenComida, comidaX, comidaY, anchoComida, altoComida);
 }
 
 function limpiarCanvas() {
