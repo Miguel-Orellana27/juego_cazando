@@ -15,6 +15,8 @@ const puntajeMaximo = 6;
 // Tiempo
 let tiempo = 15; 
 let intervaloTiempo = null; 
+let tiempoMaximo= 15;
+let tiempo = tiempoMaximo;
 
 // Dimensiones
 const anchoGato = 80;
@@ -84,6 +86,11 @@ function detectarColision() {
         mostrarEnSpan("puntos", puntos);
 
         tiempo = 15;
+        mostrarEnSpan("tiempo",tiempo);
+        
+        tiempoMaximo--;
+        if(tiempoMaximo <1)tiempoMaximo=1;
+        tiempo= tiempoMaximo;
         mostrarEnSpan("tiempo",tiempo);
 
         
