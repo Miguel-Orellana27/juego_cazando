@@ -13,7 +13,7 @@ let puntos = 0;
 const puntajeMaximo = 6; 
 
 // Tiempo
-let tiempo = 10; 
+let tiempo = 15; 
 let intervaloTiempo = null; 
 
 // Dimensiones
@@ -113,7 +113,7 @@ function reiniciarJuego() {
     comidaX = 0;
     comidaY = 0;
     puntos = 0;
-    tiempo = 10; 
+    tiempo = 15; 
     
     actualizarDibujo(); 
 
@@ -173,7 +173,7 @@ function iniciarJuego() {
     puntos = 0;
     mostrarEnSpan("puntos", puntos); 
 
-    tiempo = 10; 
+    tiempo = 15; 
     mostrarEnSpan("tiempo", tiempo); 
 
     
