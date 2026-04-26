@@ -1,3 +1,5 @@
+let imagenGato = new Image();
+imagenGato.src = "gato.png";
 let canvas = document.getElementById("areaDeJuego");
 let ctx = canvas.getContext("2d");
 
@@ -16,7 +18,6 @@ const puntajeMaximo = 6;
 let tiempo = 15; 
 let intervaloTiempo = null; 
 let tiempoMaximo= 15;
-let tiempo = tiempoMaximo;
 
 // Dimensiones
 const anchoGato = 80;
@@ -37,7 +38,7 @@ function graficarGato() {
         gatoY = (canvas.height / 2) - (altoGato / 2);
     }
     let colorGato = "#1900ffba"; 
-    graficarRectangulo(gatoX, gatoY, anchoGato, altoGato, colorGato);
+    ctx.drawImage(imagenGato, gatoX, gatoY, anchoGato, altoGato);
 }
 
 function graficarComida() {
@@ -59,13 +60,11 @@ function actualizarDibujo() {
 function detenerJuego(mensajeFinal) {
     clearInterval(intervaloTiempo); 
 
-  
     document.getElementById("btnArriba").disabled = true;
     document.getElementById("btnIzquierda").disabled = true;
     document.getElementById("btnAbajo").disabled = true;
     document.getElementById("btnDerecha").disabled = true;
 
-    
     document.getElementById("mensaje").innerText = mensajeFinal;
 }
 
@@ -76,12 +75,10 @@ function detectarColision() {
         gatoY + altoGato > comidaY &&
         gatoY < comidaY + altoComida) {
         
-        
         comidaX = generarAleatorio(0, canvas.width - anchoComida);
         comidaY = generarAleatorio(0, canvas.height - altoComida);
         actualizarDibujo(); 
 
-        
         puntos++; 
         mostrarEnSpan("puntos", puntos);
 
@@ -93,7 +90,6 @@ function detectarColision() {
         tiempo= tiempoMaximo;
         mostrarEnSpan("tiempo",tiempo);
 
-        
         if (puntos >= puntajeMaximo) {
             detenerJuego("¡Felicidades! ¡Has ganado!"); 
             alert("¡Felicidades! ¡Has ganado!"); 
@@ -107,17 +103,14 @@ function restarTiempo() {
 
     if (tiempo <= 0) {
         detenerJuego("¡Game Over! Se acabó el tiempo."); 
-        
     }
 }
 
 function reiniciarJuego() {
-    
     if (intervaloTiempo) {
         clearInterval(intervaloTiempo);
     }
 
-    
     gatoX = 0;
     gatoY = 0;
     comidaX = 0;
@@ -126,7 +119,6 @@ function reiniciarJuego() {
     tiempo = 15; 
     
     actualizarDibujo(); 
-
 
     mostrarEnSpan("puntos", puntos); 
     mostrarEnSpan("tiempo", tiempo); 
@@ -171,14 +163,11 @@ function moverAbajo() {
 }
 
 function iniciarJuego() {
-    
     graficarGato();
 
-    
     comidaX = generarAleatorio(0, canvas.width - anchoComida);
     comidaY = generarAleatorio(0, canvas.height - altoComida);
     graficarComida(); 
-
 
     puntos = 0;
     mostrarEnSpan("puntos", puntos); 
@@ -186,7 +175,6 @@ function iniciarJuego() {
     tiempo = 15; 
     mostrarEnSpan("tiempo", tiempo); 
 
-    
     document.getElementById("btnArriba").disabled = false;
     document.getElementById("btnIzquierda").disabled = false;
     document.getElementById("btnAbajo").disabled = false;
@@ -199,7 +187,6 @@ function iniciarJuego() {
     let btnAbajo = document.getElementById("btnAbajo");
     let btnReiniciar = document.getElementById("btnReiniciar");
 
-    
     if (!btnIzquierda) { console.error("Error crítico: Botón 'btnIzquierda' no encontrado."); return; }
     btnIzquierda.addEventListener('click', moverIzquierda);
 
@@ -215,7 +202,6 @@ function iniciarJuego() {
     if (!btnReiniciar) { console.error("Error crítico: Botón 'btnReiniciar' no encontrado."); return; }
     btnReiniciar.addEventListener('click', reiniciarJuego);
 
-   
     intervaloTiempo = setInterval(restarTiempo, 1000);
 
     console.log("Juego iniciado correctamente. Controles listos.");
